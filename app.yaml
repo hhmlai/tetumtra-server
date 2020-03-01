@@ -1,4 +1,5 @@
 runtime: python37
+service: server
 instance_class: F4
 entrypoint: uwsgi --http-socket :$PORT --wsgi-file server.py --callable app --master --processes 4 --enable-threads
 handlers:
