@@ -1,0 +1,5 @@
+uwsgi
+pyonmttok
+ctranslate2
+flask
+logging
