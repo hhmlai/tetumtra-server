@@ -12,16 +12,13 @@ def index():
 def translation():
     content = request.json
     model = content['model']
+    print(model)
     text = content['text'][0]
-    try:
-        translator = Translator(model_path = model)
-        tokenizer = Tokenizer("none", sp_model_path = 'model/ttpt.model')
-        tokens, features = tokenizer.tokenize(text)
-        output = translator.translate_batch(source=[tokens])
-        response = tokenizer_ttpt.detokenize(output[0][0]['tokens']) 
-    except AssertionError as error:
-        print(error)
-        response = 'ERROR: unsuported translation model'
+    translator = Translator(model_path = 'model/' +  model)
+    tokenizer = Tokenizer("none", sp_model_path = 'model/ttpt.model')
+    tokens, features = tokenizer.tokenize(text)
+    output = translator.translate_batch(source=[tokens])
+    response = tokenizer.detokenize(output[0][0]['tokens']) 
     return  jsonify({"translation":[response]})    
 
 if __name__ == '__main__':
