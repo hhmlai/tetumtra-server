@@ -7,8 +7,9 @@ def translate1(translator, batch_text, tokenizer):
   output = translator.translate_batch(source=[tokens])
   return tokenizer.detokenize(output[0][0]['tokens'])
 
-tokenizer = Tokenizer("none", sp_model_path = 'model/ttpt.model')
-trad_ttpt = ctranslate2.Translator(model_path = 'model/ct2_int16/pttt/')
+model_path = 'models/sp_int16_en/pttt/'
+tokenizer = pyonmttok.Tokenizer("none", sp_model_path = model_path + 'vocab.model')
+trad_ttpt = ctranslate2.Translator(model_path = model_path)
 
 def test(text):
     translation = translate1(trad_ttpt, text, tokenizer)
