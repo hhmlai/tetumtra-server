@@ -40,7 +40,7 @@ def translation():
         'text': content['text'],
         'translation': translation,
         'time': time,
-        'ip': request.remote_addr
+        'ip': content['ip']
     })
     client.put(task)
     return  jsonify({"translation": translation})    
