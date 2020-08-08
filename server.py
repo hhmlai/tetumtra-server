@@ -1,6 +1,10 @@
 from pyonmttok import Tokenizer
 from ctranslate2 import Translator
 from flask import Flask, jsonify, request
+from google.cloud import datastore
+from datetime import datetime
+
+client = datastore.Client()
 
 app = Flask(__name__)
 
@@ -27,6 +31,17 @@ def translation():
             response = tokenizer.detokenize(output[0][0]['tokens'])
             res_list.append(response) 
     translation = '\n'.join(res_list)
+    key = client.key('translation', datetime.timestamp())
+    task = datastore.Entity(key)
+    task.update({
+        'pair': pair,
+        'model': model,
+        'text': content['text'],
+        'translation': translation,
+        'time': datetime.now(),
+        'ip': request.remote_addr
+    })
+    client.put(task)
     return  jsonify({"translation": translation})    
 
 if __name__ == '__main__':

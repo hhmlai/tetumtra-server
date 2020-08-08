@@ -2,3 +2,4 @@ uwsgi
 pyonmttok
 ctranslate2
 flask
+google-cloud-datastore
