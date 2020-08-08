@@ -31,7 +31,7 @@ def translation():
             response = tokenizer.detokenize(output[0][0]['tokens'])
             res_list.append(response) 
     translation = '\n'.join(res_list)
-    key = client.key('translation', datetime.timestamp())
+    key = client.key('translation', datetime.now())
     task = datastore.Entity(key)
     task.update({
         'pair': pair,
