@@ -32,7 +32,7 @@ def translation():
             res_list.append(response) 
     translation = '\n'.join(res_list)
     time = datetime.utcnow().isoformat()
-    key = client.key('translation', timestamp)
+    key = client.key('translation', time)
     task = datastore.Entity(key)
     task.update({
         'pair': pair,
