@@ -31,7 +31,7 @@ def translation():
             response = tokenizer.detokenize(output[0][0]['tokens'])
             res_list.append(response) 
     translation = '\n'.join(res_list)
-    timestamp = datetime.timestamp(datetime.now())
+    time = datetime.utcnow().isoformat()
     key = client.key('translation', timestamp)
     task = datastore.Entity(key)
     task.update({
@@ -39,7 +39,7 @@ def translation():
         'model': model,
         'text': content['text'],
         'translation': translation,
-        'timestamp': timestamp,
+        'time': time,
         'ip': request.remote_addr
     })
     client.put(task)
