@@ -40,7 +40,7 @@ def translation():
         'text': content['text'],
         'translation': translation,
         'time': time,
-        'ip': content['ip']
+        'client': content['client']
     })
     client.put(task)
     return  jsonify({"translation": translation})    
