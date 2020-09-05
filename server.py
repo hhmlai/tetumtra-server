@@ -1,12 +1,14 @@
 from pyonmttok import Tokenizer
 from ctranslate2 import Translator
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from google.cloud import datastore
 from datetime import datetime
 
 client = datastore.Client()
 
 app = Flask(__name__)
+CORS(app)
 
 max_size = 500
 @app.route('/', methods=['GET'])
