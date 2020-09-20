@@ -21,18 +21,14 @@ def translation():
     model = content['model']
     pair = content['pair']
     model_path = 'models/' + model + '/' + pair + '/'
-    text_list = content['text'].splitlines()
-    res_list = []
-    for text in text_list:
-        text = text[:max_size].strip()
-        if len(text) > 0:
+    text = content['text'][:max_size].strip()
+    translation = ''
+    if len(text) > 0:
             translator = Translator(model_path = model_path)
             tokenizer = Tokenizer("none", sp_model_path = model_path + 'vocab.model')
             tokens, features = tokenizer.tokenize(text)
             output = translator.translate_batch(source=[tokens])
-            response = tokenizer.detokenize(output[0][0]['tokens'])
-            res_list.append(response) 
-    translation = '\n'.join(res_list)
+            translation = tokenizer.detokenize(output[0][0]['tokens'])
     time = datetime.utcnow().isoformat()
     key = client.key('translation', time)
     task = datastore.Entity(key)
