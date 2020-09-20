@@ -1,1 +1,4 @@
-models/sp_int16/
+__pycache__
+tetumtra.log
+.vscode/**
+.git/**
