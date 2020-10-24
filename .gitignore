@@ -2,3 +2,4 @@ models/**/**
 __pycache__
 tetumtra.log
 .vscode/**
+.venv
