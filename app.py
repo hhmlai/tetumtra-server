@@ -2,10 +2,10 @@ from pyonmttok import Tokenizer
 from ctranslate2 import Translator
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from google.cloud import datastore
-from datetime import datetime
+#from google.cloud import datastore
+#from datetime import datetime
 
-client = datastore.Client()
+#client = datastore.Client()
 
 app = Flask(__name__)
 CORS(app)
@@ -29,18 +29,18 @@ def translation():
             tokens, features = tokenizer.tokenize(text)
             output = translator.translate_batch(source=[tokens])
             translation = tokenizer.detokenize(output[0][0]['tokens'])
-    time = datetime.utcnow().isoformat()
-    key = client.key('translation', time)
-    task = datastore.Entity(key)
-    task.update({
-        'pair': pair,
-        'model': model,
-        'text': content['text'],
-        'translation': translation,
-        'time': time,
-        'client': content['client']
-    })
-    client.put(task)
+#    time = datetime.utcnow().isoformat()
+#    key = client.key('translation', time)
+#    task = datastore.Entity(key)
+#    task.update({
+#        'pair': pair,
+#        'model': model,
+#        'text': content['text'],
+#        'translation': translation,
+#        'time': time,
+#        'client': content['client']
+#    })
+#    client.put(task)
     return  jsonify({"translation": translation})    
 
 if __name__ == '__main__':

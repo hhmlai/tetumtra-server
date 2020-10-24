@@ -2,5 +2,5 @@ uwsgi
 pyonmttok
 ctranslate2
 flask
-google-cloud-datastore
+#google-cloud-datastore
 flask_cors
